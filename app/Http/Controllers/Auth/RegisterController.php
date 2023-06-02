@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -51,8 +52,16 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->where(function ($query) use ($data) {
+                return $query->where('email', $data['email']);
+            })],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone_number' => ['required', 'string', 'max:255', Rule::unique('users')->where(function ($query) use ($data) {
+                return $query->where('phone_number', $data['phone_number']);
+            })],
+        ], [
+            'email.unique' => 'The email has already been taken.',
+            'phone_number.unique' => 'The phone number has already been taken.',
         ]);
     }
 
@@ -68,6 +77,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone_number' => $data['phone_number'],
         ]);
     }
 }
