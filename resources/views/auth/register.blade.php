@@ -36,6 +36,17 @@
                     @enderror
                 </div>
                 <div class="form-group position-relative has-icon-left mb-4">
+                    <input type="text" class="form-control form-control-xl @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" placeholder="Nomor Telepon">
+                    <div class="form-control-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    @error('phone_number')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group position-relative has-icon-left mb-4">
                     <input type="password" class="form-control form-control-xl @error('password') is-invalid @enderror" name="password" placeholder="Password">
                     <div class="form-control-icon">
                         <i class="bi bi-shield-lock"></i>
