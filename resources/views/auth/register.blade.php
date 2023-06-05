@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <button class="btn btn-primary btn-block btn-lg shadow-sm mt-3">
-                    Log in
+                    Daftar
                 </button>
             </form>
             <div class="d-flex justify-content-between mt-3">
