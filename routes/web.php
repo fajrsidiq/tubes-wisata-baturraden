@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TicketPurchaseController;
+use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::middleware('auth')->group(function () {
+    Route::get('/tickets/purchase', [TicketPurchaseController::class, 'showTicketPurchaseForm'])->name('tickets.purchase');
+    Route::post('/tickets/purchase', [TicketPurchaseController::class, 'processTicketPurchase'])->name('tickets.process');
+    
+    // Add more routes as needed
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment');
