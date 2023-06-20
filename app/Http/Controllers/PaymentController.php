@@ -25,9 +25,9 @@ class PaymentController extends Controller
         $price = 20000;
 
         // Set your Midtrans credentials
-        Config::$serverKey = 'SB-Mid-server-NW6Rx6DtO7e-2HDNZZIxUF9L';
-        Config::$clientKey = 'SB-Mid-client-_DCM3k8KdjWHMFNU';
-        Config::$isProduction = 'false';
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$clientKey = env('MIDTRANS_CLIENT_KEY');
+        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION');
 
         // Create the payment token
         $params = array(
