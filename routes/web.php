@@ -31,3 +31,15 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/payment', [PaymentController::class, 'showPaymentPage'])->name('payment');
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/gallery', function () {
+    return view('gallery');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
